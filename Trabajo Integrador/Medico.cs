@@ -17,9 +17,18 @@ namespace Trabajo_Integrador
         public string Apellido { get { return apellido; } set { apellido = value; } }
         public string Especialidad { get { return especialidad; } set { especialidad = value; } }
         // Constructor
-        public Medico()
+        public Medico(int matricula, string nombre, string apellido, string especialidad)
         {
+            this.matricula = matricula;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.especialidad = especialidad;
         }
-        //Metodos
+        //Metodo buscar medico por matricula
+        public Medico ImprimirMedico()
+        {
+            Console.WriteLine($"Matrícula: {matricula}, Nombre: {nombre}, Apellido: {apellido}, Especialidad: {especialidad}");
+            return this;
+        }
     }
 }
