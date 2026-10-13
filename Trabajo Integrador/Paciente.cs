@@ -18,9 +18,20 @@ namespace Trabajo_Integrador
         public string Telefono { get { return telefono; } set { telefono = value; } }
 
         // Constructor
-        public Paciente()
+        public Paciente(string dni, string nombre, string apellido, string telefono)
         {
+            this.dni = dni;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.telefono = telefono;
         }
 
+        //metodos
+        public Paciente ImprimirPaciente()
+        {
+            Console.WriteLine($"DNI: {dni}, Nombre: {nombre}, Apellido: {apellido}, Teléfono: {telefono}");
+            return this;
+        }
     }
 }
+
