@@ -7,12 +7,30 @@ namespace Trabajo_Integrador
     public class Clinica
     {
         //atributos
+        private string nombre;
         private List<Espacio> espacios;
         private List<Medico> medicos;
         private List<Paciente> pacientes;
-        //Constructor
-        public Clinica()
+        //Propiedades
+        public string Nombre { get { return nombre; } set { nombre = value; } }
+        public List<Espacio> Espacios
         {
+            get { return espacios; }
+        }
+
+        public List<Medico> Medicos
+        {
+            get { return medicos; }
+        }
+
+        public List<Paciente> Pacientes
+        {
+            get { return pacientes; }
+        }
+        //Constructor
+        public Clinica(string nombre)
+        {
+            this.nombre = nombre;
             espacios = new List<Espacio>();
             medicos = new List<Medico>();
             pacientes = new List<Paciente>();
@@ -21,10 +39,6 @@ namespace Trabajo_Integrador
         public void AgregarEspacio(Espacio espacio)
         {
             espacios.Add(espacio);
-        }
-        public List<Espacio> RetornarEspacios()
-        {
-            return espacios;
         }
         public void EliminarEspacio(Espacio espacio)
         {
@@ -46,10 +60,6 @@ namespace Trabajo_Integrador
         {
             medicos.Add(medico);
         }
-        public List<Medico> RetornarMedicos()
-        {
-            return medicos;
-        }
         public void EliminarMedico(Medico medico)
         {
             medicos.Remove(medico);
@@ -69,10 +79,6 @@ namespace Trabajo_Integrador
         public void AgregarPaciente(Paciente paciente)
         {
             pacientes.Add(paciente);
-        }
-        public List<Paciente> RetornarPacientes()
-        {
-            return pacientes;
         }
         public void EliminarPaciente(Paciente paciente)
         {

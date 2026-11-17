@@ -28,7 +28,7 @@ namespace Trabajo_Integrador
         //metodos
         public virtual Espacio imprimirEspacio()
         {
-            Console.WriteLine($"Consultorio Nro: {nroConsultorio}, Piso: {piso}, Ala: {ala}, Medico: {medico.Nombre} {medico.Apellido}, Especialidad: {medico.Especialidad}");
+            Console.WriteLine($"Consultorio Nro: {nroConsultorio}, Piso: {piso}, Ala: {ala}, Medico: {medico.Nombre} {medico.Apellido}, Especialidad del Medico: {medico.Especialidad}");
             return this;
         }
 
@@ -52,7 +52,7 @@ namespace Trabajo_Integrador
         }
         public override Espacio imprimirEspacio()
         {
-            Console.WriteLine($"Consultorio Nro: {NroConsultorio}, Piso: {Piso}, Ala: {Ala}, Medico: {Medico.Nombre} {Medico.Apellido}, Especialidad: {Medico.Especialidad}, Receta: {receta}");
+            Console.WriteLine($" Consultorio General: Consultorio Nro: {NroConsultorio}, Piso: {Piso}, Ala: {Ala}, Medico: {Medico.Nombre} {Medico.Apellido}, Especialidad: {Medico.Especialidad}, Receta: {receta}");
             return this;
         }
     }
@@ -72,33 +72,69 @@ namespace Trabajo_Integrador
             this.horariosAtencion = horariosAtencion;
         }
         //Metodo
-        public void AgregarHorario(HorarioAtencion horario)
+        public override Espacio imprimirEspacio()
         {
-            horariosAtencion.Add(horario);
+            Console.WriteLine($" Consultorio Especializado: Consultorio Nro: {NroConsultorio}, Piso: {Piso}, Ala: {Ala}, Medico: {Medico.Nombre} {Medico.Apellido}, Especialidad: {especialidad}");
+            return this;
         }
     }
                                                             // Salas de diagnostico
     public class SalasDiagnostico : Espacio
         {
             //atributos
-            private string tipoDiagnostico;
+            private string tipoEstudio;
             //Propiedades
-            public string TipoDiagnostico { get { return tipoDiagnostico; } set { tipoDiagnostico = value; } }
+            public string TipoEstudio { get { return tipoEstudio; } set { tipoEstudio = value; } }
             //Constructor
-            public SalasDiagnostico(int nroConsultorio, int piso, string ala, Medico medico, string tipoDiagnostico) : base(nroConsultorio, piso, ala, medico)
+            public SalasDiagnostico(int nroConsultorio, int piso, string ala, Medico medico, string tipoEstudio) : base(nroConsultorio, piso, ala, medico)
             {
-                this.tipoDiagnostico = tipoDiagnostico;
+                this.tipoEstudio = tipoEstudio;
             }
             //Metodo
             public override Espacio imprimirEspacio()
-            {
-                Console.WriteLine($"Consultorio Nro: {NroConsultorio}, Piso: {Piso}, Ala: {Ala}, Medico: {Medico.Nombre} {Medico.Apellido}, Especialidad: {Medico.Especialidad}, Tipo de Diagnóstico: {tipoDiagnostico}");
-                return this;
+            { 
+                Console.WriteLine($" Sala de diagnostico: Consultorio Nro: {NroConsultorio}, Piso: {Piso}, Ala: {Ala}, Medico: {Medico.Nombre} {Medico.Apellido},Tipo de Estudio: {tipoEstudio}");
+            return this;
             }
 
         }
-    public class SalasUrgencias: Espacio
-    {
-        private int 
+                                                                        //Salas de Urgencia
+    public class SalaUrgencia : Espacio
+        {
+        //atributos
+        private bool libre;
+        private int nivelUrgencia;
+        private Paciente paciente;
+
+        //Propiedades
+        public bool Libre { get { return libre; } set { libre = value; } }
+        public Paciente Paciente { get { return paciente; } set { paciente = value; } }
+        public int NivelUrgencia { get { return nivelUrgencia; } set { nivelUrgencia = value; } }
+        //Constructor
+        public SalaUrgencia(int nroConsultorio, int piso, string ala, Medico medico, bool libre, Paciente paciente, int nivelUrgencia) : base(nroConsultorio, piso, ala, medico)
+        {
+            this.libre = libre;
+            this.paciente = paciente;
+            this.nivelUrgencia = nivelUrgencia;
+        }
+        // Constructor sobrecargado sin paciente
+        public SalaUrgencia(int nroConsultorio, int piso, string ala, Medico medico, bool libre, int nivelUrgencia) : base(nroConsultorio, piso, ala, medico)
+        {
+            this.libre = libre;
+            this.nivelUrgencia = nivelUrgencia;
+        }
+        // Metodo
+        public override Espacio imprimirEspacio()
+        {
+            if (!libre && paciente != null)
+            {
+                Console.WriteLine($" Sala de Urgencia: Consultorio Nro: {NroConsultorio}, Piso: {Piso}, Ala: {Ala}, Medico: {Medico.Nombre} {Medico.Apellido},Ocupado, Paciente: {paciente.Nombre} {paciente.Apellido}, Nivel de Urgencia: {nivelUrgencia}");
+            }
+            else
+            {
+                Console.WriteLine($" Sala de Urgencia: Consultorio Nro: {NroConsultorio}, Piso: {Piso}, Ala: {Ala}, Medico: {Medico.Nombre} {Medico.Apellido},Libre , Nivel de Urgencia: {nivelUrgencia}");
+            }
+            return this;
+        }
     }
-}
+    }   
