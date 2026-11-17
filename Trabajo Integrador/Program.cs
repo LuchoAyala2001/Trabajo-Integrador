@@ -7,7 +7,7 @@
             Console.WriteLine("Ingrese el nombre de la clinica: ");
             string nombreClinica = Console.ReadLine();
             Clinica ClinicaDeLuis = new Clinica(nombreClinica);
-            // Métodos para retornar las colecciones de la clínica
+            // Métodos para retornar las colecciones de la clínicaa
             static List<Espacio> RetornarEspacios(Clinica clinica)
             {
                 return clinica.Espacios;
